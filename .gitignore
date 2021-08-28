@@ -3,3 +3,6 @@
 *.exe
 *.class
 
+# input files
+*.zip
+
