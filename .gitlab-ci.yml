@@ -1,0 +1,14 @@
+image: ubuntu:latest
+
+stages:
+  - test
+
+before_script:
+  - apt-get update -y
+  - apt-get install build-essential -y
+
+compile_check:
+  stage: test
+  script:
+    - make test
+
