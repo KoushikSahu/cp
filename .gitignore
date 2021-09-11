@@ -6,3 +6,5 @@
 # input files
 *.zip
 
+# cph config files
+.cph/
