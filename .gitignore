@@ -8,3 +8,7 @@
 
 # cph config files
 .cph/
+
+# editor caches
+.vscode/
+
