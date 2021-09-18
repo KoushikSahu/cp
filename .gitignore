@@ -12,3 +12,8 @@
 # editor caches
 .vscode/
 
+# stress and other test files
+gen
+brute
+test_*
+
