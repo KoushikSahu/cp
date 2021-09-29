@@ -3,8 +3,9 @@
 *.exe
 *.class
 
-# input files
+# io files
 *.zip
+*.in
 
 # cph config files
 .cph/
@@ -16,4 +17,7 @@
 gen
 brute
 test_*
+
+# debugging files
+.vimspector.json
 
