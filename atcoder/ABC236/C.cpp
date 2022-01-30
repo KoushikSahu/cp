@@ -43,50 +43,39 @@ void _print(T t, V... v) {__print(t); if (sizeof...(v)) cerr << ", "; _print(v..
 #define debug(x...)
 #endif
 
-const int nxm = 2e5+5;
-string n;
-int m;
-int cnt[10], dp[nxm];
+/*
+  Author: Koushik Sahu
+  Created: 2022-01-23 17:36 IST
+*/
+
+const int nxm = 1e5+5;
+int n, m;
+string s[nxm], t;
 
 void solve(){
   cin>>n>>m;
-  int ans = 0;
-  for(char c: n){
-    int d = c - '0';
-    int diff = 9 - d;
-    if(diff >= m){
-      ans++;
+  for(int i=0; i<n; i++){
+    cin>>s[i];
+  }
+  set<string> ex;
+  for(int i=0; i<m; i++){
+    cin>>t;
+    ex.insert(t);
+  }
+  for(int i=0; i<n; i++){
+    if(ex.find(s[i])!=ex.end()){
+      cout<<"Yes\n";
     }else{
-      int tmp = m - diff - 1;
-      ans += dp[tmp];
-      ans %= MOD;
+      cout<<"No\n";
     }
   }
-  cout<<ans<<'\n';
 }
 
 int main(){
   ios_base::sync_with_stdio(false);
   cin.tie(NULL);
-  fill(cnt, cnt+10, 0);
-  fill(dp, dp+nxm, 0);
-  dp[0] = 2;
-  cnt[0]++, cnt[1]++;
-  for(int i=1; i<nxm; i++){
-    int tmp = cnt[9];
-    for(int j=9; j>=1; j--){
-      cnt[j] = cnt[j-1];
-    }
-    cnt[0] = tmp;
-    cnt[1] += tmp;
-    cnt[1] %= MOD;
-    for(int j=0; j<=9; j++){
-      dp[i] += cnt[j];
-      dp[i] %= MOD;
-    }
-  }
   int T=1;
-  cin>>T;
+  //cin>>T;
   while(T--){
     solve();
   }

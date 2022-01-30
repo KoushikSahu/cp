@@ -10,14 +10,15 @@ int rand(int a, int b){
 }
 
 int main(int argc, char* argv[]){
-  srand(atoi(argv[1]));
-  cout<<1<<'\n';
-  int n = rand(1, 5);
-  cout<<n<<'\n';
-  for(int i=0; i<n; i++){
-    cout<<rand(1, 5)<<' ';
+  int T = 100, n = 100, val = 1e9;
+  cout<<T<<'\n';
+  while(T--){
+    cout<<n<<'\n';
+    for(int i=0; i<n; i++) cout<<val<<' ';
+    cout<<'\n';
+    for(int i=0; i<n; i++) cout<<val<<' ';
+    cout<<'\n';
   }
-  cout<<'\n';
   return 0;
 }
 

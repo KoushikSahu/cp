@@ -43,50 +43,74 @@ void _print(T t, V... v) {__print(t); if (sizeof...(v)) cerr << ", "; _print(v..
 #define debug(x...)
 #endif
 
-const int nxm = 2e5+5;
-string n;
-int m;
-int cnt[10], dp[nxm];
+/*
+  Author: Koushik Sahu
+  Created: 2022-01-22 18:28 IST
+*/
 
-void solve(){
-  cin>>n>>m;
-  int ans = 0;
-  for(char c: n){
-    int d = c - '0';
-    int diff = 9 - d;
-    if(diff >= m){
-      ans++;
+struct Dp {
+  int ans, idx;
+  
+  Dp(){
+    ans = 0;
+    idx = 0;
+  }
+};
+
+const int nxm = 2e5+5;
+int n, p[nxm], q[nxm];
+
+int bin_search(vint& lis, int val){
+  int low=0, high=sz(lis)-1, ans=-1;
+  while(low<=high){
+    int mid = low + ((high-low)>>1);
+    if(lis[mid]>=val){
+      ans = mid;
+      high = mid-1;
     }else{
-      int tmp = m - diff - 1;
-      ans += dp[tmp];
-      ans %= MOD;
+      low = mid+1;
     }
   }
-  cout<<ans<<'\n';
+  return ans;
+}
+
+void solve(){
+  cin>>n;
+  for(int i=0; i<n; i++) cin>>p[i];
+  int idx[n+1];
+  for(int i=0; i<n; i++){
+    cin>>q[i];
+    idx[q[i]] = i;
+  }
+  vector<ipair> vp;
+  for(int i=0; i<n; i++){
+    int val = p[i];
+    while(val<=n){
+      vp.push_back({i, idx[val]});
+      val += p[i];
+    }
+  }
+  sort(all(vp), [](ipair a, ipair b){
+      return make_pair(a.first, -a.second) < make_pair(b.first, -b.second);
+      });
+  vint lis;
+  lis.push_back(vp[0].second);
+  for(int i=1; i<sz(vp); i++){
+    if(vp[i].second > lis.back()){
+      lis.push_back(vp[i].second);
+    }else{
+      int j = bin_search(lis, vp[i].second);
+      lis[j] = vp[i].second;
+    }
+  }
+  cout<<sz(lis)<<'\n';
 }
 
 int main(){
   ios_base::sync_with_stdio(false);
   cin.tie(NULL);
-  fill(cnt, cnt+10, 0);
-  fill(dp, dp+nxm, 0);
-  dp[0] = 2;
-  cnt[0]++, cnt[1]++;
-  for(int i=1; i<nxm; i++){
-    int tmp = cnt[9];
-    for(int j=9; j>=1; j--){
-      cnt[j] = cnt[j-1];
-    }
-    cnt[0] = tmp;
-    cnt[1] += tmp;
-    cnt[1] %= MOD;
-    for(int j=0; j<=9; j++){
-      dp[i] += cnt[j];
-      dp[i] %= MOD;
-    }
-  }
   int T=1;
-  cin>>T;
+  //cin>>T;
   while(T--){
     solve();
   }

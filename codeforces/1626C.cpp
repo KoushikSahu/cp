@@ -43,48 +43,44 @@ void _print(T t, V... v) {__print(t); if (sizeof...(v)) cerr << ", "; _print(v..
 #define debug(x...)
 #endif
 
-const int nxm = 2e5+5;
-string n;
-int m;
-int cnt[10], dp[nxm];
+/*
+  Author: Koushik Sahu
+  Created: 2022-01-17 22:19 IST
+*/
+
+const int nxm = 105;
+int n, k[nxm], h[nxm];
+
+ll cumsum(int x){
+  return (1ll*x*(x+1))/2;
+}
 
 void solve(){
-  cin>>n>>m;
-  int ans = 0;
-  for(char c: n){
-    int d = c - '0';
-    int diff = 9 - d;
-    if(diff >= m){
-      ans++;
+  cin>>n;
+  for(int i=0; i<n; i++) cin>>k[i];
+  for(int i=0; i<n; i++) cin>>h[i];
+  vector<ipair> spans;
+  for(int i=0; i<n; i++) spans.push_back({k[i]-h[i]+1, k[i]});
+  sort(all(spans));
+  ll ans = 0;
+  int l = spans[0].first, r = spans[0].second;
+  for(int i=1; i<sz(spans); i++){
+    if(!(l>spans[i].second || r<spans[i].first)){
+      l = min(l, spans[i].first);
+      r = max(r, spans[i].second);
     }else{
-      int tmp = m - diff - 1;
-      ans += dp[tmp];
-      ans %= MOD;
+      ans += cumsum(r-l+1);
+      l = spans[i].first;
+      r = spans[i].second;
     }
   }
+  ans += cumsum(r-l+1);
   cout<<ans<<'\n';
 }
 
 int main(){
   ios_base::sync_with_stdio(false);
   cin.tie(NULL);
-  fill(cnt, cnt+10, 0);
-  fill(dp, dp+nxm, 0);
-  dp[0] = 2;
-  cnt[0]++, cnt[1]++;
-  for(int i=1; i<nxm; i++){
-    int tmp = cnt[9];
-    for(int j=9; j>=1; j--){
-      cnt[j] = cnt[j-1];
-    }
-    cnt[0] = tmp;
-    cnt[1] += tmp;
-    cnt[1] %= MOD;
-    for(int j=0; j<=9; j++){
-      dp[i] += cnt[j];
-      dp[i] %= MOD;
-    }
-  }
   int T=1;
   cin>>T;
   while(T--){

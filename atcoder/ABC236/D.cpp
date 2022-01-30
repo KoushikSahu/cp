@@ -1,4 +1,5 @@
 #include <bits/stdc++.h>
+#include <cwchar>
 #include <ext/pb_ds/assoc_container.hpp>
 #include <ext/pb_ds/tree_policy.hpp>
 using namespace std;
@@ -43,50 +44,28 @@ void _print(T t, V... v) {__print(t); if (sizeof...(v)) cerr << ", "; _print(v..
 #define debug(x...)
 #endif
 
-const int nxm = 2e5+5;
-string n;
-int m;
-int cnt[10], dp[nxm];
+/*
+  Author: Koushik Sahu
+  Created: 2022-01-23 17:40 IST
+*/
+
+const int nxm = 8+5;
+int n, a[nxm][nxm];
 
 void solve(){
-  cin>>n>>m;
-  int ans = 0;
-  for(char c: n){
-    int d = c - '0';
-    int diff = 9 - d;
-    if(diff >= m){
-      ans++;
-    }else{
-      int tmp = m - diff - 1;
-      ans += dp[tmp];
-      ans %= MOD;
+  cin>>n;
+  for(int i=0; i<2*n-1; i++){
+    for(int j=i+1; j<2*n; j++){
+      cin>>a[i][j];
     }
   }
-  cout<<ans<<'\n';
 }
 
 int main(){
   ios_base::sync_with_stdio(false);
   cin.tie(NULL);
-  fill(cnt, cnt+10, 0);
-  fill(dp, dp+nxm, 0);
-  dp[0] = 2;
-  cnt[0]++, cnt[1]++;
-  for(int i=1; i<nxm; i++){
-    int tmp = cnt[9];
-    for(int j=9; j>=1; j--){
-      cnt[j] = cnt[j-1];
-    }
-    cnt[0] = tmp;
-    cnt[1] += tmp;
-    cnt[1] %= MOD;
-    for(int j=0; j<=9; j++){
-      dp[i] += cnt[j];
-      dp[i] %= MOD;
-    }
-  }
   int T=1;
-  cin>>T;
+  //cin>>T;
   while(T--){
     solve();
   }
