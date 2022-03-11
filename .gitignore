@@ -6,6 +6,7 @@
 # io files
 *.zip
 *.in
+*.txt
 
 # cph config files
 .cph/
@@ -15,7 +16,11 @@
 
 # stress and other test files
 gen
+*.gen
+gen.*
 brute
+*.brute
+brute.*
 test_*
 
 # debugging files
