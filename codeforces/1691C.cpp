@@ -6,6 +6,8 @@ using namespace __gnu_pbds;
 template<class T> using ordered_set = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node_update>;
 #define M_PI 3.14159265358979323846
 #define MOD 1000000007
+#define INF 1000000005
+#define NEG_INF -1000000005
 #define sz(x) (int)x.size()
 #define all(x) x.begin(), x.end()
 typedef long long ll;
@@ -43,33 +45,52 @@ void _print(T t, V... v) {__print(t); if (sizeof...(v)) cerr << ", "; _print(v..
 #define debug(x...)
 #endif
 
-string n;
-int m;
+/*
+    Author: Koushik Sahu
+    Created: 2022-06-04 11:53 IST
+*/
 
 void solve(){
-  cin>>n>>m;
-  while(m--){
-    string tmp = "";
-    for(char i: n){
-      if(i<'9') tmp += (i+1);
-      else tmp += "10";
+    int n, k;
+    string s;
+    cin>>n>>k>>s;
+    int len = sz(s);
+    int fidx = -1, lidx = -1, one_cnt = 0;
+    for(int i=0; i<len; i++){
+        if(s[i] == '1'){
+            if(fidx == -1) fidx = i;
+            lidx = i;
+            one_cnt++;
+        } 
     }
-    n = tmp;
-    int cnt = 0;
-    if(cnt<10) debug(n);
-    cnt++;
-  }
-  cout<<n.size()<<'\n';
+    int ans = 0;
+    if(fidx==-1){
+        cout<<ans<<'\n';
+        return ;
+    }
+    int rcnt = len - 1 - lidx;
+    int lcnt = fidx;
+    if(one_cnt && rcnt<=k){
+        swap(s[lidx], s[len-1]);
+        k -= rcnt;
+        one_cnt--;
+    }
+    if(one_cnt && lcnt<=k) swap(s[0], s[fidx]);
+    for(int i=0; i+1<len; i++){
+        ans += ((s[i]-'0')*10);
+        ans += ((s[i+1]-'0'));
+    }
+    cout<<ans<<'\n';
 }
 
 int main(){
-  ios_base::sync_with_stdio(false);
-  cin.tie(NULL);
-  int T=1;
-  cin>>T;
-  while(T--){
-    solve();
-  }
-  return 0;
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    int T=1;
+    cin>>T;
+    while(T--){
+        solve();
+    }
+    return 0;
 }
 

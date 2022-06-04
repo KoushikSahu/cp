@@ -15,10 +15,10 @@
 .vscode/
 
 # stress and other test files
-gen
+gen.cpp
 *.gen
 gen.*
-brute
+brute.cpp
 *.brute
 brute.*
 test_*
