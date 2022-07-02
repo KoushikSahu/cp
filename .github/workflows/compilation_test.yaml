@@ -1,0 +1,21 @@
+
+name: compilation test on push in main
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  compilation_test:
+    name: compilation test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: install packages
+        run: sudo apt-get install build-essential python3 -y
+      - name: run compilation tests
+        run: make test
