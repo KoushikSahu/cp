@@ -10,7 +10,7 @@ template<class T> using ordered_set = tree<T, null_type, less<T>, rb_tree_tag, t
 #define all(x) x.begin(), x.end()
 typedef long long ll;
 typedef vector<int> vint;
-typedef vector<vint> vvint
+typedef vector<vint> vvint;
 typedef vector<ll> vll;
 typedef vector<vll> vvll;
 typedef pair<int, int> ipair;
