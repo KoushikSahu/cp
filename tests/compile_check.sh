@@ -20,6 +20,9 @@ do
 	elif [[ $file == *Makefile ]]
 	then
 		echo "Ignoring compile test for makefile"
+	elif [[ $file == *.sh ]]
+	then
+		echo "Ignoring compile test for scripts"
 	else
 		echo "Unknown file type"
 		exit 1
