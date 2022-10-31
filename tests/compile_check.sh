@@ -10,7 +10,7 @@ do
 		python3 -m py_compile $file
 	elif [[ $file == *.cpp ]]
 	then
-		g++ $file
+		g++ -std=c++2a $file
 	elif [[ $file == *.c ]]
 	then
 		gcc $file
