@@ -23,6 +23,15 @@ do
 	elif [[ $file == *.sh ]]
 	then
 		echo "Ignoring compile test for scripts"
+	elif [[ $file == *.rs ]]
+	then
+		rustc $file
+	elif [[ $file == *.toml ]]
+	then
+		echo "Ignoring compile test for toml files"
+	elif [[ $file == *.lock ]]
+	then
+		echo "Ignoring compile test for lock files"
 	else
 		echo "Unknown file type"
 		exit 1
