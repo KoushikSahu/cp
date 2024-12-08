@@ -26,6 +26,9 @@ do
 	elif [[ $file == *.rs ]]
 	then
 		rustc -Awarnings $file
+	elif [[ $file == *.skiptests ]]
+	then
+		echo "Ignoring compile test for files marked to skip tests"
 	elif [[ $file == *.toml ]]
 	then
 		echo "Ignoring compile test for toml files"
