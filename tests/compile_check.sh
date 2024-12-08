@@ -25,7 +25,7 @@ do
 		echo "Ignoring compile test for scripts"
 	elif [[ $file == *.rs ]]
 	then
-		rustc $file
+		rustc -Awarnings $file
 	elif [[ $file == *.toml ]]
 	then
 		echo "Ignoring compile test for toml files"
