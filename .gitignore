@@ -3,6 +3,7 @@
 *.exe
 *.class
 target/
+*.jar
 
 # io files
 *.zip
